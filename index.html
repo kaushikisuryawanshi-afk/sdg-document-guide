@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="EasyDocs Guide - Helping citizens apply for Passport, Voter ID, Birth Certificate, PAN Card, and Driving License. Supporting UN SDG 16.9: Legal Identity for All.">
+    <meta name="author" content="Your Name">
+    <meta name="keywords" content="Passport, Voter ID, Birth Certificate, PAN Card, Driving License, Government Documents, SDG 16, Legal Identity">
+    <meta name="theme-color" content="#4CAF50">
+    <title>EasyDocs Guide | Government Document Assistant | SDG 16</title>
+    
+    <!-- Favicon for browser tab -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1a 50%, #1a1a2e 100%);
+        }
+
+        body.dark-mode .guide-container {
+            background: #1e1e2e;
+            color: #eee;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        body.dark-mode .document-title,
+        body.dark-mode .subtitle {
+            color: #eee;
+        }
+
+        body.dark-mode .subtitle {
+            border-bottom-color: #333;
+        }
+
+        body.dark-mode .checklist-item {
+            background: #2a2a3e;
+            color: #ddd;
+        }
+
+        body.dark-mode .checklist-item:hover {
+            background: #35354a;
+        }
+
+        body.dark-mode .checklist-item.checked {
+            background: #1a3a1a;
+        }
+
+        body.dark-mode .step {
+            background: #1a1a3e;
+            color: #ddd;
+            border-left-color: #4CAF50;
+        }
+
+        body.dark-mode .info-card {
+            background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+        }
+
+        body.dark-mode .info-card .label {
+            color: #aaa;
+        }
+
+        body.dark-mode .info-card .value {
+            color: #ff9800;
+        }
+
+        body.dark-mode .doc-card {
+            background: rgba(30, 30, 46, 0.95);
+            border-color: #333;
+        }
+
+        body.dark-mode .doc-card h3 {
+            color: #eee;
+        }
+
+        body.dark-mode .doc-card p {
+            color: #aaa;
+        }
+
+        body.dark-mode .doc-card.active {
+            background: #2a2a3e;
+            border-color: #4CAF50;
+        }
+
+        body.dark-mode .progress-section {
+            background: #2a2a3e;
+        }
+
+        body.dark-mode .progress-text {
+            color: #ddd;
+        }
+
+        body.dark-mode .footer {
+            color: rgba(255,255,255,0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header h1 span {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 5px 20px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .sdg-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .keyboard-hint {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Top Bar with Toggles */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 8px 18px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .toggle-btn {
+            background: rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Language specific */
+        .lang-hindi {
+            display: none;
+        }
+
+        body.lang-hindi-active .lang-english {
+            display: none;
+        }
+
+        body.lang-hindi-active .lang-hindi {
+            display: inline;
+        }
+
+        /* Document Cards */
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .doc-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 2px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .doc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        .doc-card.active {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #ffffff, #f0fff4);
+            box-shadow: 0 10px 30px rgba(76,175,80,0.3);
+        }
+
+        body.dark-mode .doc-card.active {
+            background: linear-gradient(135deg, #2a2a3e, #1a3a1a);
+        }
+
+        .doc-icon {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        .doc-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .doc-card p {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        /* Main Guide Container */
+        .guide-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .document-title {
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            margin-bottom: 25px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .progress-bar-container {
+            background: #ddd;
+            border-radius: 20px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Checklist */
+        .checklist-section {
+            margin-bottom: 30px;
+        }
+
+        .checklist-section h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .checklist-item {
+            background: #f9f9f9;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .checklist-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .checklist-item input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #4CAF50;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .checklist-item.checked {
+            background: #e8f5e9;
+            border-left-color: #4CAF50;
+        }
+
+        .checklist-item.checked label {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* Steps */
+        .steps-section {
+            margin-bottom: 30px;
+        }
+
+        .steps-section h3 {
+            color: #2196F3;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .step {
+            background: #e3f2fd;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 12px;
+            border-left: 5px solid #2196F3;
+            transition: transform 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .step:hover {
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 12px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .info-card:hover {
+            transform: scale(1.02);
+        }
+
+        .info-card .label {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .info-card .value {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 10px rgba(76,175,80,0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(76,175,80,0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2196F3, #0b7dda);
+            color: white;
+            box-shadow: 0 4px 10px rgba(33,150,243,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #0b7dda, #0866a3);
+            transform: translateY(-2px);
+        }
+
+        .official-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+        }
+
+        .official-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Tooltip */
+        [data-tooltip] {
+            position: relative;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            margin-bottom: 8px;
+            z-index: 100;
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .documents-grid, .footer, .btn-group, .sdg-badge, .header, .official-link, .progress-section, .keyboard-hint, .top-bar {
+                display: none;
+            }
+            .guide-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .checklist-item input {
+                display: inline-block;
+            }
+            .step, .checklist-item, .info-card {
+                break-inside: avoid;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 1.5rem; }
+            .document-title { font-size: 1.3rem; }
+            .guide-container { padding: 20px; }
+            .btn { padding: 8px 15px; font-size: 0.8rem; }
+            .step:hover, .checklist-item:hover { transform: none; }
+            .documents-grid { gap: 12px; }
+            .doc-card { padding: 15px 10px; }
+            .doc-icon { font-size: 2rem; }
+            .doc-card h3 { font-size: 1rem; }
+            .top-bar { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar with Dark Mode and Language Toggle -->
+        <div class="top-bar">
+            <button class="toggle-btn" id="darkModeBtn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            <button class="toggle-btn" id="languageBtn" onclick="toggleLanguage()">🇮🇳 हिंदी</button>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>📄 <span class="lang-english">EasyDocs Guide</span><span class="lang-hindi">ईज़ीडॉक्स गाइड</span></h1>
+            <p class="lang-english">Your step-by-step assistant for government documents</p>
+            <p class="lang-hindi">सरकारी दस्तावेज़ों के लिए आपका स्टेप-बाय-स्टेप सहायक</p>
+            <div class="sdg-badge">
+                🎯 SDG 16: Peace, Justice & Strong Institutions | Target 16.9 - Legal Identity for All
+            </div>
+            <div class="keyboard-hint">
+                💡 Tip: Press 1 (Passport) | 2 (Voter ID) | 3 (Birth) | 4 (PAN) | 5 (Driving)
+            </div>
+        </div>
+
+        <!-- Document Selection Cards -->
+        <div class="documents-grid">
+            <div class="doc-card" data-doc="passport" data-tooltip="Apply for new or renewal passport">
+                <div class="doc-icon">🛂</div>
+                <h3 class="lang-english">Passport</h3>
+                <h3 class="lang-hindi">पासपोर्ट</h3>
+                <p class="lang-english">International travel</p>
+                <p class="lang-hindi">अंतरराष्ट्रीय यात्रा</p>
+            </div>
+            <div class="doc-card" data-doc="voterid" data-tooltip="Register to vote in elections">
+                <div class="doc-icon">🗳️</div>
+                <h3 class="lang-english">Voter ID</h3>
+                <h3 class="lang-hindi">मतदाता पहचान पत्र</h3>
+                <p class="lang-english">Voting rights</p>
+                <p class="lang-hindi">मतदान अधिकार</p>
+            </div>
+            <div class="doc-card" data-doc="birthcert" data-tooltip="Your first legal identity document">
+                <div class="doc-icon">👶</div>
+                <h3 class="lang-english">Birth Certificate</h3>
+                <h3 class="lang-hindi">जन्म प्रमाण पत्र</h3>
+                <p class="lang-english">Legal identity</p>
+                <p class="lang-hindi">कानूनी पहचान</p>
+            </div>
+            <div class="doc-card" data-doc="pancard" data-tooltip="Apply for Permanent Account Number">
+                <div class="doc-icon">💳</div>
+                <h3 class="lang-english">PAN Card</h3>
+                <h3 class="lang-hindi">पैन कार्ड</h3>
+                <p class="lang-english">Tax & Bank</p>
+                <p class="lang-hindi">टैक्स और बैंक</p>
+            </div>
+            <div class="doc-card" data-doc="drivinglicense" data-tooltip="Apply for Driving License">
+                <div class="doc-icon">🚗</div>
+                <h3 class="lang-english">Driving License</h3>
+                <h3 class="lang-hindi">ड्राइविंग लाइसेंस</h3>
+                <p class="lang-english">Vehicle permit</p>
+                <p class="lang-hindi">वाहन परमिट</p>
+            </div>
+        </div>
+
+        <!-- Dynamic Guide Content -->
+        <div class="guide-container" id="guideContainer">
+            <div id="dynamicContent">
+                <!-- Content loaded via JavaScript -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="lang-english">© 2026 EasyDocs Guide | Helping citizens access legal identity documents | SDG 16.9</p>
+            <p class="lang-hindi">© 2026 ईज़ीडॉक्स गाइड | नागरिकों को कानूनी पहचान दस्तावेज़ तक पहुंचाने में मदद | एसडीजी 16.9</p>
+            <p style="font-size: 0.7rem; margin-top: 8px;">📅 Version 3.0 | Last Updated: June 2026 | Open Source</p>
+            <p style="font-size: 0.65rem; margin-top: 5px;" class="lang-english">🏛️ This tool is for guidance only. Always refer to official government websites.</p>
+            <p style="font-size: 0.65rem; margin-top: 5px;" class="lang-hindi">🏛️ यह टूल केवल मार्गदर्शन के लिए है। हमेशा आधिकारिक सरकारी वेबसाइटों पर जाएं।</p>
+        </div>
+    </div>
+
+    <script>
+        // Bilingual Document Data - English & Hindi
+        const documentsData = {
+            passport: {
+                en: {
+                    title: "🛂 Indian Passport Application Guide",
+                    subtitle: "Apply for a fresh passport or renewal - Official Government Process",
+                    requiredDocs: [
+                        "Proof of Date of Birth (Birth Certificate / Class 10 Certificate)",
+                        "Proof of Address (Aadhaar / Voter ID / Utility Bill)",
+                        "Identity Proof (Aadhaar / Voter ID / PAN Card)",
+                        "Recent Passport Size Photos (4.5cm x 3.5cm, white background)",
+                        "Self-attested copies of all documents",
+                        "Fee payment receipt (online payment confirmation)"
+                    ],
+                    steps: [
+                        "Visit Passport Seva Official Website (passportindia.gov.in)",
+                        "Register as a new user or login with existing account",
+                        "Fill online application form (Form 1 for fresh passport)",
+                        "Pay the application fee online (Net Banking / Card / UPI)",
+                        "Book an appointment at your nearest Passport Seva Kendra (PSK)",
+                        "Visit PSK on appointment date with original documents",
+                        "Complete biometric verification (fingerprints & photo)",
+                        "Police verification conducted at your address",
+                        "Receive passport by post within 2-3 weeks"
+                    ],
+                    fee: "₹1,500 - ₹2,000 (depending on scheme)",
+                    timeline: "2-3 weeks (normal) | 1 week (tatkal)",
+                    officialLink: "https://passportindia.gov.in",
+                    helpline: "1800-258-1800"
+                },
+                hi: {
+                    title: "🛂 भारतीय पासपोर्ट आवेदन गाइड",
+                    subtitle: "नया पासपोर्ट या नवीनीकरण के लिए आवेदन करें - आधिकारिक सरकारी प्रक्रिया",
+                    requiredDocs: [
+                        "जन्म तिथि का प्रमाण (जन्म प्रमाण पत्र / कक्षा 10 का प्रमाण पत्र)",
+                        "पते का प्रमाण (आधार / मतदाता पहचान पत्र / उपयोगिता बिल)",
+                        "पहचान प्रमाण (आधार / मतदाता पहचान पत्र / पैन कार्ड)",
+                        "हाल के पासपोर्ट साइज फोटो (4.5cm x 3.5cm, सफेद पृष्ठभूमि)",
+                        "सभी दस्तावेजों की स्व-सत्यापित प्रतियां",
+                        "शुल्क भुगतान रसीद (ऑनलाइन भुगतान पुष्टि)"
+                    ],
+                    steps: [
+                        "पासपोर्ट सेवा आधिकारिक वेबसाइट पर जाएं (passportindia.gov.in)",
+                        "नए उपयोगकर्ता के रूप में पंजीकरण करें या मौजूदा खाते से लॉगिन करें",
+                        "ऑनलाइन आवेदन पत्र भरें (नए पासपोर्ट के लिए फॉर्म 1)",
+                        "आवेदन शुल्क ऑनलाइन भुगतान करें (नेट बैंकिंग / कार्ड / यूपीआई)",
+                        "अपने निकटतम पासपोर्ट सेवा केंद्र (पीएसके) पर अपॉइंटमेंट बुक करें",
+                        "अपॉइंटमेंट तिथि पर मूल दस्तावेजों के साथ पीएसके जाएं",
+                        "बायोमेट्रिक सत्यापन पूरा करें (फिंगरप्रिंट और फोटो)",
+                        "आपके पते पर पुलिस सत्यापन किया जाता है",
+                        "2-3 सप्ताह के भीतर पासपोर्ट डाक द्वारा प्राप्त करें"
+                    ],
+                    fee: "₹1,500 - ₹2,000 (योजना पर निर्भर)",
+                    timeline: "2-3 सप्ताह (सामान्य) | 1 सप्ताह (तत्काल)",
+                    officialLink: "https://passportindia.gov.in",
+                    helpline: "1800-258-1800"
+                }
+            },
+            voterid: {
+                en: {
+                    title: "🗳️ Voter ID Card Application Guide",
+                    subtitle: "Register to vote - Your right to shape democracy",
+                    requiredDocs: [
+                        "Recent Passport Size Photograph",
+                        "Proof of Age (Birth Certificate / Class 10 Certificate)",
+                        "Proof of Residence (Aadhaar / Bank Passbook / Rent Agreement)",
+                        "Identity Proof (Aadhaar / PAN / Driving License)",
+                        "Duly filled Form 6 (for new registration)"
+                    ],
+                    steps: [
+                        "Go to National Voters' Service Portal (nvsp.in)",
+                        "Click on 'Form 6' for new voter registration",
+                        "Fill all personal details (Name, Age, Address, etc.)",
+                        "Upload required documents (photo, address proof, age proof)",
+                        "Select your assembly constituency",
+                        "Submit the application online",
+                        "Note down the reference number for tracking",
+                        "BLO (Booth Level Officer) will verify your address",
+                        "Get your name in voter list and receive EPIC card by post"
+                    ],
+                    fee: "FREE (No cost for voter registration)",
+                    timeline: "15-30 days after verification",
+                    officialLink: "https://nvsp.in",
+                    helpline: "1950 (Toll Free)"
+                },
+                hi: {
+                    title: "🗳️ मतदाता पहचान पत्र आवेदन गाइड",
+                    subtitle: "मतदान के लिए पंजीकरण करें - लोकतंत्र को आकार देने का आपका अधिकार",
+                    requiredDocs: [
+                        "हाल का पासपोर्ट साइज फोटो",
+                        "आयु प्रमाण (जन्म प्रमाण पत्र / कक्षा 10 का प्रमाण पत्र)",
+                        "निवास प्रमाण (आधार / बैंक पासबुक / किराया समझौता)",
+                        "पहचान प्रमाण (आधार / पैन / ड्राइविंग लाइसेंस)",
+                        "भरा हुआ फॉर्म 6 (नए पंजीकरण के लिए)"
+                    ],
+                    steps: [
+                        "राष्ट्रीय मतदाता सेवा पोर्टल (nvsp.in) पर जाएं",
+                        "नए मतदाता पंजीकरण के लिए 'फॉर्म 6' पर क्लिक करें",
+                        "सभी व्यक्तिगत विवरण भरें (नाम, आयु, पता, आदि)",
+                        "आवश्यक दस्तावेज अपलोड करें (फोटो, पता प्रमाण, आयु प्रमाण)",
+                        "अपना विधानसभा क्षेत्र चुनें",
+                        "आवेदन ऑनलाइन जमा करें",
+                        "ट्रैकिंग के लिए संदर्भ संख्या नोट करें",
+                        "बीएलओ आपके पते की पुष्टि करेगा",
+                        "मतदाता सूची में अपना नाम प्राप्त करें और डाक द्वारा ईपीआईसी कार्ड प्राप्त करें"
+                    ],
+                    fee: "मुफ्त (मतदाता पंजीकरण के लिए कोई लागत नहीं)",
+                    timeline: "सत्यापन के बाद 15-30 दिन",
+                    officialLink: "https://nvsp.in",
+                    helpline: "1950 (टोल फ्री)"
+                }
+            },
+            birthcert: {
+                en: {
+                    title: "👶 Birth Certificate Application Guide",
+                    subtitle: "Your first legal identity document - Essential for everything",
+                    requiredDocs: [
+                        "Hospital Discharge Summary / Birth Confirmation Letter",
+                        "Parent's ID Proof (Aadhaar / Voter ID / Passport)",
+                        "Parent's Address Proof",
+                        "Marriage Certificate of Parents (if available)",
+                        "Proof of Birth Date from Hospital"
+                    ],
+                    steps: [
+                        "Get birth registration form from hospital or local municipal office",
+                        "Fill the form with child's details and parent information",
+                        "Attach hospital birth certificate and parent ID proofs",
+                        "Submit to Municipal Corporation / Gram Panchayat office",
+                        "Pay nominal registration fee (₹10-₹50)",
+                        "Get acknowledgement slip",
+                        "Online application also available at crsorgi.gov.in",
+                        "Birth certificate issued within 7-15 days",
+                        "For delayed registration (>21 days), additional process required"
+                    ],
+                    fee: "₹10 - ₹50 (within 21 days) | Higher for delayed registration",
+                    timeline: "7-15 days (normal) | 1 day (tatkal in some states)",
+                    officialLink: "https://crsorgi.gov.in",
+                    helpline: "Contact local Municipal Corporation"
+                },
+                hi: {
+                    title: "👶 जन्म प्रमाण पत्र आवेदन गाइड",
+                    subtitle: "आपका पहला कानूनी पहचान दस्तावेज - हर चीज के लिए आवश्यक",
+                    requiredDocs: [
+                        "अस्पताल डिस्चार्ज सारांश / जन्म पुष्टि पत्र",
+                        "माता-पिता का आईडी प्रमाण (आधार / मतदाता पहचान पत्र / पासपोर्ट)",
+                        "माता-पिता का पता प्रमाण",
+                        "माता-पिता का विवाह प्रमाण पत्र (यदि उपलब्ध हो)",
+                        "अस्पताल से जन्म तिथि का प्रमाण"
+                    ],
+                    steps: [
+                        "अस्पताल या स्थानीय नगर निगम कार्यालय से जन्म पंजीकरण फॉर्म प्राप्त करें",
+                        "बच्चे के विवरण और माता-पिता की जानकारी के साथ फॉर्म भरें",
+                        "अस्पताल जन्म प्रमाण पत्र और माता-पिता के आईडी प्रमाण संलग्न करें",
+                        "नगर निगम / ग्राम पंचायत कार्यालय में जमा करें",
+                        "नाममात्र पंजीकरण शुल्क (₹10-₹50) का भुगतान करें",
+                        "स्वीकृति पर्ची प्राप्त करें",
+                        "ऑनलाइन आवेदन crsorgi.gov.in पर भी उपलब्ध है",
+                        "7-15 दिनों के भीतर जन्म प्रमाण पत्र जारी किया जाता है",
+                        "विलंबित पंजीकरण (>21 दिन) के लिए, अतिरिक्त प्रक्रिया आवश्यक है"
+                    ],
+                    fee: "₹10 - ₹50 (21 दिनों के भीतर) | विलंबित पंजीकरण के लिए अधिक",
+                    timeline: "7-15 दिन (सामान्य) | 1 दिन (कुछ राज्यों में तत्काल)",
+                    officialLink: "https://crsorgi.gov.in",
+                    helpline: "स्थानीय नगर निगम से संपर्क करें"
+                }
+            },
+            pancard: {
+                en: {
+                    title: "💳 PAN Card Application Guide",
+                    subtitle: "Permanent Account Number - Required for financial transactions",
+                    requiredDocs: [
+                        "Proof of Identity (Aadhaar / Voter ID / Passport)",
+                        "Proof of Address (Aadhaar / Voter ID / Utility Bill)",
+                        "Proof of Date of Birth (Birth Certificate / Class 10 Certificate)",
+                        "Recent Passport Size Photograph (2 copies)",
+                        "Duly filled Form 49A (for Indian citizens)",
+                        "Application fee payment receipt"
+                    ],
+                    steps: [
+                        "Visit NSDL PAN website (www.tin-nsdl.com) or UTIITSL",
+                        "Select 'Apply for New PAN Card (Form 49A)'",
+                        "Fill personal details (Name, Date of Birth, Father's Name)",
+                        "Provide address and contact information",
+                        "Upload required documents (photo, signature, proofs)",
+                        "Pay the application fee (₹107 including GST)",
+                        "Submit application and note down acknowledgement number",
+                        "Physical PAN card is couriered within 15 days",
+                        "Download e-PAN instantly from email"
+                    ],
+                    fee: "₹107 (including GST for communication)",
+                    timeline: "15 days (physical) | Instant (e-PAN)",
+                    officialLink: "https://www.tin-nsdl.com",
+                    helpline: "1800-258-1818"
+                },
+                hi: {
+                    title: "💳 पैन कार्ड आवेदन गाइड",
+                    subtitle: "स्थायी खाता संख्या - वित्तीय लेनदेन के लिए आवश्यक",
+                    requiredDocs: [
+                        "पहचान प्रमाण (आधार / मतदाता पहचान पत्र / पासपोर्ट)",
+                        "पते का प्रमाण (आधार / मतदाता पहचान पत्र / उपयोगिता बिल)",
+                        "जन्म तिथि का प्रमाण (जन्म प्रमाण पत्र / कक्षा 10 का प्रमाण पत्र)",
+                        "हाल का पासपोर्ट साइज फोटो (2 प्रतियां)",
+                        "भरा हुआ फॉर्म 49A (भारतीय नागरिकों के लिए)",
+                        "आवेदन शुल्क भुगतान रसीद"
+                    ],
+                    steps: [
+                        "एनएसडीएल पैन वेबसाइट (www.tin-nsdl.com) या यूटीआईआईटीएसएल पर जाएं",
+                        "'नए पैन कार्ड के लिए आवेदन करें (फॉर्म 49A)' चुनें",
+                        "व्यक्तिगत विवरण भरें (नाम, जन्म तिथि, पिता का नाम)",
+                        "पता और संपर्क जानकारी प्रदान करें",
+                        "आवश्यक दस्तावेज अपलोड करें (फोटो, हस्ताक्षर, प्रमाण)",
+                        "आवेदन शुल्क का भुगतान करें (जीएसटी सहित ₹107)",
+                        "आवेदन जमा करें और स्वीकृति संख्या नोट करें",
+                        "भौतिक पैन कार्ड 15 दिनों के भीतर कोरियर किया जाता है",
+                        "ई-पैन तुरंत ईमेल से डाउनलोड करें"
+                    ],
+                    fee: "₹107 (संचार के लिए जीएसटी सहित)",
+                    timeline: "15 दिन (भौतिक) | तत्काल (ई-पैन)",
+                    officialLink: "https://www.tin-nsdl.com",
+                    helpline: "1800-258-1818"
+                }
+            },
+            drivinglicense: {
+                en: {
+                    title: "🚗 Driving License Application Guide",
+                    subtitle: "Learner's License + Permanent Driving License - Complete guide",
+                    requiredDocs: [
+                        "Proof of Age (Birth Certificate / Class 10 Certificate / Passport)",
+                        "Proof of Address (Aadhaar / Voter ID / Passport / Utility Bill)",
+                        "Medical Certificate (Form 1A) from government hospital",
+                        "Passport Size Photographs (5-6 copies)",
+                        "Learner's License (valid for 6 months)",
+                        "Driving Training Certificate from recognized school (optional)"
+                    ],
+                    steps: [
+                        "Apply for Learner's License online on Parivahan Sewa (sarathi.parivahan.gov.in)",
+                        "Fill Form 2 for Learner's License",
+                        "Schedule and pass online learner's test (20 questions, 15 correct needed)",
+                        "Receive Learner's License (valid for 6 months)",
+                        "After 30 days, apply for Permanent Driving License (Form 4)",
+                        "Book driving test appointment at RTO",
+                        "Bring your own vehicle for the driving test",
+                        "Pass the driving test (figure 8, parallel parking, road driving)",
+                        "Receive Permanent Driving License by post within 2-3 weeks"
+                    ],
+                    fee: "₹200 (Learner's) + ₹300 (Permanent) approx",
+                    timeline: "Learner's: 1 week | Permanent: 3-4 weeks after test",
+                    officialLink: "https://parivahan.gov.in",
+                    helpline: "Contact local RTO office"
+                },
+                hi: {
+                    title: "🚗 ड्राइविंग लाइसेंस आवेदन गाइड",
+                    subtitle: "लर्नर लाइसेंस + स्थायी ड्राइविंग लाइसेंस - संपूर्ण गाइड",
+                    requiredDocs: [
+                        "आयु प्रमाण (जन्म प्रमाण पत्र / कक्षा 10 का प्रमाण पत्र / पासपोर्ट)",
+                        "पते का प्रमाण (आधार / मतदाता पहचान पत्र / पासपोर्ट / उपयोगिता बिल)",
+                        "चिकित्सा प्रमाण पत्र (फॉर्म 1ए) सरकारी अस्पताल से",
+                        "पासपोर्ट साइज फोटो (5-6 प्रतियां)",
+                        "लर्नर लाइसेंस (6 महीने के लिए वैध)",
+                        "मान्यता प्राप्त स्कूल से ड्राइविंग प्रशिक्षण प्रमाण पत्र (वैकल्पिक)"
+                    ],
+                    steps: [
+                        "परिवहन सेवा (sarathi.parivahan.gov.in) पर लर्नर लाइसेंस के लिए ऑनलाइन आवेदन करें",
+                        "लर्नर लाइसेंस के लिए फॉर्म 2 भरें",
+                        "ऑनलाइन लर्नर परीक्षा शेड्यूल करें और पास करें (20 प्रश्न, 15 सही चाहिए)",
+                        "लर्नर लाइसेंस प्राप्त करें (6 महीने के लिए वैध)",
+                        "30 दिनों के बाद, स्थायी ड्राइविंग लाइसेंस (फॉर्म 4) के लिए आवेदन करें",
+                        "आरटीओ में ड्राइविंग टेस्ट अपॉइंटमेंट बुक करें",
+                        "ड्राइविंग टेस्ट के लिए अपना वाहन लाएं",
+                        "ड्राइविंग टेस्ट पास करें (आकृति 8, समानांतर पार्किंग, सड़क ड्राइविंग)",
+                        "2-3 सप्ताह के भीतर डाक द्वारा स्थायी ड्राइविंग लाइसेंस प्राप्त करें"
+                    ],
+                    fee: "₹200 (लर्नर) + ₹300 (स्थायी) लगभग",
+                    timeline: "लर्नर: 1 सप्ताह | स्थायी: परीक्षा के बाद 3-4 सप्ताह",
+                    officialLink: "https://parivahan.gov.in",
+                    helpline: "स्थानीय आरटीओ कार्यालय से संपर्क करें"
+                }
+            }
+        };
+
+        let currentDoc = 'passport';
+        let currentLang = 'en'; // 'en' or 'hi'
+        let checklistStatus = {};
+
+        // Load checklist from localStorage
+        function loadChecklistStatus(docKey, lang) {
+            const key = `checklist_${docKey}_${lang}`;
+            const saved = localStorage.getItem(key);
+            const docData = documentsData[docKey][lang];
+            if (saved) {
+                checklistStatus[key] = JSON.parse(saved);
+            } else {
+                checklistStatus[key] = {};
+                docData.requiredDocs.forEach((_, idx) => {
+                    checklistStatus[key][idx] = false;
+                });
+            }
+            return checklistStatus[key];
+        }
+
+        // Save checklist
+        function saveChecklistStatus(docKey, lang, idx, checked) {
+            const key = `checklist_${docKey}_${lang}`;
+            if (!checklistStatus[key]) {
+                checklistStatus[key] = {};
+            }
+            checklistStatus[key][idx] = checked;
+            localStorage.setItem(key, JSON.stringify(checklistStatus[key]));
+            updateProgressBar(docKey, lang);
+        }
+
+        // Update progress bar
+        function updateProgressBar(docKey, lang) {
+            const key = `checklist_${docKey}_${lang}`;
+            const status = checklistStatus[key] || {};
+            const docData = documentsData[docKey][lang];
+            const total = docData.requiredDocs.length;
+            const completed = Object.values(status).filter(v => v === true).length;
+            const percentage = total > 0 ? (completed / total) * 100 : 0;
+            
+            const progressBar = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+            if (progressText) {
+                if (lang === 'en') {
+                    progressText.textContent = `${completed} of ${total} documents collected (${Math.round(percentage)}%)`;
+                } else {
+                    progressText.textContent = `${completed} of ${total} दस्तावेज़ एकत्र किए गए (${Math.round(percentage)}%)`;
+                }
+            }
+        }
+
+        // Toggle checklist item
+        window.toggleChecklist = function(docKey, lang, idx) {
+            const key = `checklist_${docKey}_${lang}`;
+            const currentStatus = checklistStatus[key]?.[idx] || false;
+            const newStatus = !currentStatus;
+            saveChecklistStatus(docKey, lang, idx, newStatus);
+            
+            const items = document.querySelectorAll('.checklist-item');
+            if (items[idx]) {
+                if (newStatus) {
+                    items[idx].classList.add('checked');
+                    items[idx].querySelector('input').checked = true;
+                } else {
+                    items[idx].classList.remove('checked');
+                    items[idx].querySelector('input').checked = false;
+                }
+            }
+        }
+
+        // Reset checklist
+        window.resetChecklist = function(docKey, lang) {
+            const key = `checklist_${docKey}_${lang}`;
+            const docData = documentsData[docKey][lang];
+            docData.requiredDocs.forEach((_, idx) => {
+                if (!checklistStatus[key]) checklistStatus[key] = {};
+                checklistStatus[key][idx] = false;
+            });
+            localStorage.setItem(key, JSON.stringify(checklistStatus[key]));
+            renderGuide(docKey, lang);
+        }
+
+        // Download PDF
+        window.downloadGuide = function() {
+            window.print();
+        }
+
+        // Dark Mode Toggle
+        window.toggleDarkMode = function() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('darkModeBtn');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.innerHTML = '☀️ Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                btn.innerHTML = '🌙 Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Language Toggle
+        window.toggleLanguage = function() {
+            if (currentLang === 'en') {
+                currentLang = 'hi';
+                document.body.classList.add('lang-hindi-active');
+                document.getElementById('languageBtn').innerHTML = '🇬🇧 English';
+                localStorage.setItem('language', 'hi');
+            } else {
+                currentLang = 'en';
+                document.body.classList.remove('lang-hindi-active');
+                document.getElementById('languageBtn').innerHTML = '🇮🇳 हिंदी';
+                localStorage.setItem('language', 'en');
+            }
+            renderGuide(currentDoc, currentLang);
+        }
+
+        // Load dark mode preference
+        function loadDarkModePreference() {
+            const darkModePref = localStorage.getItem('darkMode');
+            if (darkModePref === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const btn = document.getElementById('darkModeBtn');
+                if (btn) btn.innerHTML = '☀️ Light Mode';
+            }
+        }
+
+        // Load language preference
+        function loadLanguagePreference() {
+            const langPref = localStorage.getItem('language');
+            if (langPref === 'hi') {
+                currentLang = 'hi';
+                document.body.classList.add('lang-hindi-active');
+                const btn = document.getElementById('languageBtn');
+                if (btn) btn.innerHTML = '🇬🇧 English';
+            } else {
+                currentLang = 'en';
+                document.body.classList.remove('lang-hindi-active');
+                const btn = document.getElementById('languageBtn');
+                if (btn) btn.innerHTML = '🇮🇳 हिंदी';
+            }
+        }
+
+        // Render guide
+        function renderGuide(docKey, lang) {
+            const doc = documentsData[docKey][lang];
+            if (!doc) return;
+
+            currentDoc = docKey;
+            const status = loadChecklistStatus(docKey, lang);
+
+            const total = doc.requiredDocs.length;
+            const completed = Object.values(status).filter(v => v === true).length;
+            const percentage = total > 0 ? (completed / total) * 100 : 0;
+
+            const requiredLabel = lang === 'en' ? '📋 Required Documents' : '📋 आवश्यक दस्तावेज़';
+            const requiredSub = lang === 'en' ? '(click to check off)' : '(जांचने के लिए क्लिक करें)';
+            const stepsLabel = lang === 'en' ? '📝 Step-by-Step Process' : '📝 चरण-दर-चरण प्रक्रिया';
+            const feeLabel = lang === 'en' ? '💰 Estimated Fee' : '💰 अनुमानित शुल्क';
+            const timelineLabel = lang === 'en' ? '⏱️ Processing Time' : '⏱️ प्रसंस्करण समय';
+            const helplineLabel = lang === 'en' ? '📞 Helpline' : '📞 हेल्पलाइन';
+            const resetLabel = lang === 'en' ? '🔄 Reset Checklist' : '🔄 सूची रीसेट करें';
+            const pdfLabel = lang === 'en' ? '📥 Download as PDF Guide' : '📥 पीडीएफ गाइड डाउनलोड करें';
+            const visitLabel = lang === 'en' ? '🔗 Visit Official Website →' : '🔗 आधिकारिक वेबसाइट पर जाएं →';
+
+            let html = `
+                <h2 class="document-title">${doc.title}</h2>
+                <p class="subtitle">${doc.subtitle}</p>
+                
+                <div class="progress-section">
+                    <div class="progress-text" id="progressText">${completed} of ${total} ${lang === 'en' ? 'documents collected' : 'दस्तावेज़ एकत्र किए गए'} (${Math.round(percentage)}%)</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-fill" id="progressFill" style="width: ${percentage}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="checklist-section">
+                    <h3>${requiredLabel} <span style="font-size:0.75rem;">${requiredSub}</span></h3>
+            `;
+            
+            doc.requiredDocs.forEach((item, idx) => {
+                const isChecked = status[idx] || false;
+                html += `
+                    <div class="checklist-item ${isChecked ? 'checked' : ''}" onclick="toggleChecklist('${docKey}', '${lang}', ${idx})">
+                        <input type="checkbox" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); toggleChecklist('${docKey}', '${lang}', ${idx})">
+                        <label>${item}</label>
+                    </div>
+                `;
+            });
+            
+            html += `</div><div class="steps-section"><h3>${stepsLabel}</h3>`;
+            
+            doc.steps.forEach((step, idx) => {
+                html += `
+                    <div class="step">
+                        <span class="step-number">${idx + 1}</span>
+                        ${step}
+                    </div>
+                `;
+            });
+            
+            html += `</div><div class="info-grid">
+                <div class="info-card">
+                    <div class="label">${feeLabel}</div>
+                    <div class="value">${doc.fee}</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">${timelineLabel}</div>
+                    <div class="value">${doc.timeline}</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">${helplineLabel}</div>
+                    <div class="value">${doc.helpline}</div>
+                </div>
+            </div><div class="btn-group">
+                <button class="btn btn-primary" onclick="resetChecklist('${docKey}', '${lang}')">${resetLabel}</button>
+                <button class="btn btn-secondary" onclick="downloadGuide()">${pdfLabel}</button>
+            </div>
+            <a href="${doc.officialLink}" target="_blank" class="official-link">${visitLabel}</a>`;
+
+            document.getElementById('dynamicContent').innerHTML = html;
+
+            // Highlight active card
+            document.querySelectorAll('.doc-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.getAttribute('data-doc') === docKey) {
+                    card.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners for cards
+        document.querySelectorAll('.doc-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const docKey = card.getAttribute('data-doc');
+                renderGuide(docKey, currentLang);
+            });
+        });
+
+        // Keyboard shortcuts (1, 2, 3, 4, 5)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '1') {
+                renderGuide('passport', currentLang);
+                document.querySelector('[data-doc="passport"]').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '2') {
+                renderGuide('voterid', currentLang);
+                document.querySelector('[data-doc="voterid"]').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '3') {
+                renderGuide('birthcert', currentLang);
+                document.querySelector('[data-doc="birthcert"]').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '4') {
+                renderGuide('pancard', currentLang);
+                document.querySelector('[data-doc="pancard"]').scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === '5') {
+                renderGuide('drivinglicense', currentLang);
+                document.querySelector('[data-doc="drivinglicense"]').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Load preferences and initialize
+        loadDarkModePreference();
+        loadLanguagePreference();
+        renderGuide('passport', currentLang);
+    </script>
+</body>
+</html>
